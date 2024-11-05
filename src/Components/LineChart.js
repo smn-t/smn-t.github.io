@@ -58,7 +58,7 @@ const CustomLineChart = ({ data, targetWeight }) => {
                     <Label value="Price" position="insideLeft" angle={-90} offset={0} fill={'white'} />
                 </YAxis>
                 <Tooltip content={<CustomTooltip />} />
-                <Line type="monotone" dataKey="price" stroke='orange' />
+                <Line type="monotone" dataKey="price" stroke='orange' dot={false} />
             </LineChart>
         </ResponsiveContainer >
     );
