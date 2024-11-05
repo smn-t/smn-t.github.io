@@ -15,44 +15,55 @@ const darkTheme = createTheme({
 // Main App
 const MainDashboard = () => {
 
-    const reformatedData = [
-        { "unixTimeStamp": 1700000000000, "price": 150.50 },
-        { "unixTimeStamp": 1700086400000, "price": 151.20 },
-        { "unixTimeStamp": 1700172800000, "price": 149.80 },
-        { "unixTimeStamp": 1700259200000, "price": 150.10 },
-        { "unixTimeStamp": 1700345600000, "price": 151.75 },
-        { "unixTimeStamp": 1700432000000, "price": 152.30 },
-        { "unixTimeStamp": 1700518400000, "price": 153.00 },
-        { "unixTimeStamp": 1700604800000, "price": 152.20 },
-        { "unixTimeStamp": 1700691200000, "price": 151.60 },
-        { "unixTimeStamp": 1700777600000, "price": 150.90 },
-        { "unixTimeStamp": 1700864000000, "price": 151.40 },
-        { "unixTimeStamp": 1700950400000, "price": 150.70 },
-        { "unixTimeStamp": 1701036800000, "price": 149.90 },
-        { "unixTimeStamp": 1701123200000, "price": 150.30 },
-        { "unixTimeStamp": 1701209600000, "price": 151.10 },
-        { "unixTimeStamp": 1701296000000, "price": 150.50 },
-        { "unixTimeStamp": 1701382400000, "price": 149.80 },
-        { "unixTimeStamp": 1701468800000, "price": 150.20 },
-        { "unixTimeStamp": 1701555200000, "price": 150.80 },
-        { "unixTimeStamp": 1701641600000, "price": 151.00 }
-    ]
+    const [backendData, setBackendData] = useState([]);
 
-    const targetWeight = 80
+    const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=demo'
 
+    useEffect(() => {
+        // Funktion zum Fetchen der Daten vom Backend
+        const fetchData = async () => {
+            try {
+                const response = await fetch(url);
+                // const response = await fetch("http://localhost:3001/api/data"); // for local developing
+                const data = await response.json();
+                setBackendData(data);
+
+
+            } catch (error) {
+                console.error('Fehler beim Fetchen der Daten:', error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+
+    const reformatedData = backendData["Time Series (5min)"]
+        ? Object.keys(backendData["Time Series (5min)"]).map(dateTime => {
+            const unixTimestamp = Date.parse(dateTime); // Convert to Unix timestamp in milliseconds
+            const closePrice = backendData["Time Series (5min)"][dateTime]["4. close"];
+            return { unixTimeStamp: unixTimestamp, price: parseFloat(closePrice) };
+        })
+        : [];
+
+
+    const current_price = reformatedData.length > 0 ? reformatedData.at(-1)["price"] : null;
+
+
+    console.log(current_price);
 
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <Container maxWidth={false}>
                 <Typography variant="h3" paddingTop={3} paddingBottom={1} paddingInline={2}>
-                    Der heilige Amumbo
+                    IBM
                 </Typography>
                 <Grid container spacing={2} padding={2}>
                     <Grid item xs={12} sm={6} md={3}>
                         <Paper >
                             <Typography variant="h6" paddingInline={1}>Current</Typography>
-                            <Typography variant="h4" paddingInline={1}>{151}</Typography>
+                            <Typography variant="h4" paddingInline={1}>{current_price}</Typography>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
