@@ -48,11 +48,37 @@ const MainDashboard = () => {
                 <Typography variant="h3" paddingTop={3} paddingBottom={1} paddingInline={2}>
                     Der heilige Amumbo
                 </Typography>
-                    <Grid item xs={12} md={8}>
+                <Grid container spacing={2} padding={2}>
+                    <Grid item xs={12} sm={6} md={3}>
                         <Paper >
-                            <LineChart data={reformatedData} targetWeight={targetWeight} />
+                            <Typography variant="h6" paddingInline={1}>Current</Typography>
+                            <Typography variant="h4" paddingInline={1}>{151}</Typography>
                         </Paper>
                     </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                        <Paper >
+                            <Typography variant="h6" paddingInline={1}>200SMA</Typography>
+                            <Typography variant="h4" paddingInline={1}>{130}</Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                        <Paper >
+                            <Typography variant="h6" paddingInline={1}>To be Configured</Typography>
+                            <Typography variant="h4" paddingInline={1}>{255}</Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} sm={6} md={3}>
+                        <Paper >
+                            <Typography variant="h6" paddingInline={1}>To be Configured</Typography>
+                            <Typography variant="h4" paddingInline={1}>{255}</Typography>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                        <Paper >
+                            <LineChart data={reformatedData} />
+                        </Paper>
+                    </Grid>
+                </Grid>
             </Container>
         </ThemeProvider>
     );
