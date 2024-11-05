@@ -1,7 +1,7 @@
 {
   "name": "dashboard",
   "version": "0.1.0",
-  "homepage": "https://https://smn-t.github.io/react-gh-pages",
+  "homepage": "https://smn-t.github.io",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.13.3",

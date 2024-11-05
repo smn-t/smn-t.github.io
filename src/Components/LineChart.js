@@ -27,7 +27,7 @@ const CustomLineChart = ({ data, targetWeight }) => {
             return (
                 <div style={{ borderWidth: 2, borderStyle: "dashed", borderColor: "black", background: "grey" }}>
                     <p>{`Date: ${new Date(label).toLocaleDateString()}`}</p>
-                    <p>{`Price: ${payload[0].value} kg`}</p>
+                    <p>{`Price: ${payload[0].value} €`}</p>
                 </div >
             );
         }
