@@ -37,7 +37,4 @@ jobs:
         run: npm install
 
       - name: Deploy
-        run: |
-          git config --local user.name "github-actions"
-          git config --local user.email "github-actions@github.com"
-          npm run deploy
+        run: npm run deploy
