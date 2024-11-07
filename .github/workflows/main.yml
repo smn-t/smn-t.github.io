@@ -28,7 +28,7 @@ jobs:
         run: |
           git config --local user.name "github-actions"
           git config --local user.email "github-actions@github.com"
-          git add data.json
+          git add src/data.json
           git commit -m "Update data.json with latest API data"
           git push
         continue-on-error: true # Ignoriere Fehler, wenn es keine Änderungen gibt
