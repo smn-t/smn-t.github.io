@@ -1,8 +1,8 @@
 name: Fetch Data and Deploy
 
 on:
-  schedule:
-    - cron: "0 * * * *" # Läuft jede Stunde
+#  schedule:
+#    - cron: "0 * * * *" # Läuft jede Stunde
   workflow_dispatch: # Manuelles Auslösen
 
 jobs:
