@@ -22,7 +22,7 @@ jobs:
         env:
           API_REQUEST_URL: ${{ secrets.API_REQUEST_URL }} # Setze die gesamte URL inkl. API Key als Secret
         run: |
-          curl -s "$API_REQUEST_URL" > data.json
+          curl -s "$API_REQUEST_URL" > src/data.json
 
       - name: Commit and Push JSON
         run: |
