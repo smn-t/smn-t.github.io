@@ -40,8 +40,8 @@ const MainDashboard = () => {
                 <Typography variant="h3" paddingTop={3} paddingBottom={1} paddingInline={2}>
                     Der heilige Amumbo
                 </Typography>
-                <Typography variant="h5" paddingTop={3} paddingBottom={1} paddingInline={2}>
-                    <i>"Cry rich or try dying"</i> - 50 Pfennig (alemannischr Sprechgesangskünstler)
+                <Typography variant="h8" paddingInline={2}>
+                    <i>"Cry rich or try dying!"</i> - 50 Cent (angelsächsischer Sprechgesangskünstler)
                 </Typography>
                 <Grid container spacing={2} padding={2}>
                     <Grid item xs={12} sm={6} md={3}>
