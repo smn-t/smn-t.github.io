@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Label } from 'recharts';
+import { useTheme } from '@mui/material/styles';
 
 const CustomLineChart = ({ data, targetWeight }) => {
+    const theme = useTheme();
+
     const [containerDimensions, setContainerDimensions] = useState({
         height: window.innerHeight * 0.7,
     });
@@ -58,7 +61,7 @@ const CustomLineChart = ({ data, targetWeight }) => {
                     <Label value="Price" position="insideLeft" angle={-90} offset={0} fill={'white'} />
                 </YAxis>
                 <Tooltip content={<CustomTooltip />} />
-                <Line type="monotone" dataKey="price" stroke='orange' dot={false} />
+                <Line type="monotone" dataKey="price" dot={false} stroke={theme.palette.text.secondary}/>
             </LineChart>
         </ResponsiveContainer >
     );
