@@ -1,0 +1,40 @@
+name: Fetch Data and Deploy
+
+on:
+  schedule:
+    - cron: "0 * * * *" # Läuft jede Stunde
+  workflow_dispatch: # Manuelles Auslösen
+
+jobs:
+  fetch_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "22"
+
+      - name: Fetch Data from API
+        env:
+          API_REQUEST_URL: ${{ secrets.API_REQUEST_URL }} # Setze die gesamte URL inkl. API Key als Secret
+        run: |
+          curl -s "$API_REQUEST_URL" > data.json
+
+      - name: Commit and Push JSON
+        run: |
+          git config --local user.name "github-actions"
+          git config --local user.email "github-actions@github.com"
+          git add data.json
+          git commit -m "Update data.json with latest API data"
+          git push
+        continue-on-error: true # Ignoriere Fehler, wenn es keine Änderungen gibt
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Deploy
+        run: npm run deploy
