@@ -38,7 +38,7 @@ const MainDashboard = () => {
             <CssBaseline />
             <Container maxWidth={false}>
                 <Typography variant="h3" paddingTop={3} paddingBottom={1} paddingInline={2}>
-                    MBG.DEX
+                    Der heilige Amumbo
                 </Typography>
                 <Grid container spacing={2} padding={2}>
                     <Grid item xs={12} sm={6} md={3}>
