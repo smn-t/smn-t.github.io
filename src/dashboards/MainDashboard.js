@@ -3,6 +3,7 @@ import { Container, Grid, Paper, Typography } from '@mui/material';
 import LineChart from '../Components/LineChart';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import data from '../data.json'
 
 // Theme
 const darkTheme = createTheme({
@@ -11,36 +12,17 @@ const darkTheme = createTheme({
     },
 });
 
-
 // Main App
 const MainDashboard = () => {
 
-    const [backendData, setBackendData] = useState([]);
 
-    const url = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=MBG.DEX&outputsize=full&apikey=demo'
-
-    useEffect(() => {
-        // Funktion zum Fetchen der Daten vom Backend
-        const fetchData = async () => {
-            try {
-                const response = await fetch(url);
-                const data = await response.json();
-                setBackendData(data);
+    console.log(data);
 
 
-            } catch (error) {
-                console.error('Fehler beim Fetchen der Daten:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-
-    const reformatedData = backendData["Time Series (Daily)"]
-        ? Object.keys(backendData["Time Series (Daily)"]).map(dateTime => {
+    const reformatedData = data["Time Series (Daily)"]
+        ? Object.keys(data["Time Series (Daily)"]).map(dateTime => {
             const unixTimestamp = Date.parse(dateTime); // Convert to Unix timestamp in milliseconds
-            const closePrice = backendData["Time Series (Daily)"][dateTime]["4. close"];
+            const closePrice = data["Time Series (Daily)"][dateTime]["4. close"];
             return { unixTimeStamp: unixTimestamp, price: parseFloat(closePrice) };
         })
         : [];
