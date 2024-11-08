@@ -1,8 +1,11 @@
 name: Notify Investors
 
 on:
+  workflow_run:
+    workflows: ["Fetch Data and Deploy"]
+    types:
+      - completed
   workflow_dispatch:
-  push:
 
 jobs:
   deploy:
