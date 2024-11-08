@@ -20,6 +20,5 @@ jobs:
         env:
           telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
         run: |
-          cd scripts
           python3 notify.py
           echo "Done"
