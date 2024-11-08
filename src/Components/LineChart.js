@@ -41,7 +41,7 @@ const CustomLineChart = ({ data }) => {
                 <div style={{ borderWidth: 2, borderStyle: "dashed", borderColor: "black", background: "grey" }}>
                     <p>{`Date: ${new Date(label).toLocaleDateString()}`}</p>
                     <p>{`Price: ${payload[0].value} €`}</p>
-                    {payload[1] && <p>{`SMA 200: ${payload[1].value.toFixed(2)} €`}</p>}
+                    {payload[1] && <p>{`SMA: ${payload[1].value.toFixed(2)} €`}</p>}
                 </div >
             );
         }
