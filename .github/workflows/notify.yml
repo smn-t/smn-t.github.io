@@ -20,5 +20,5 @@ jobs:
         env:
           telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
         run: |
-          python3 notify.py
+          python3 scripts/notify.py
           echo "Done"
