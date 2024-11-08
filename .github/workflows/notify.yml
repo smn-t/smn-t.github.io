@@ -16,7 +16,7 @@ jobs:
           python3 -m pip install --upgrade pip
           pip install -r requirements.txt
 
-- name: execute py script
+      - name: execute py script
         env:
           telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
         run: |
