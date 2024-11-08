@@ -29,13 +29,13 @@ bot.send_message(chat_id="-4568154747", text='Guten Morgen! Hier ist der aktuell
 if df['4. close'][-1] > df['200_sma'][-1]:
     bot.send_message(chat_id="-4568154747", text=
                      r'''
-                     Der 200 days simple moving average liegt über dem aktuellen Preis!
+                     Der 200 days simple moving average liegt unter dem aktuellen Preis!
 Aktueller Preis: {0}€
 200 SMA: {1}€'''.format(df['4. close'][-1], df['200_sma'][-1]))
 elif df['4. close'][-1] < df['200_sma'][-1]:
     bot.send_message(chat_id="-4568154747", text=
                      r'''
-                    Der 200 days simple moving average liegt unter dem aktuellen Preis!
+                    Der 200 days simple moving average liegt über dem aktuellen Preis!
 Aktueller Preis: {0}€
 200 SMA: {1}€
 Starkes Kaufsignal!'''.format(df['4. close'][-1], df['200_sma'][-1]))
