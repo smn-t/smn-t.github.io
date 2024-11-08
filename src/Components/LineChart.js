@@ -53,13 +53,13 @@ const CustomLineChart = ({ data }) => {
     const theme = useTheme();
 
     const [containerDimensions, setContainerDimensions] = useState({
-        height: window.innerHeight * 0.7,
+        height: window.innerHeight * 0.8,
     });
 
     useEffect(() => {
         const handleResize = () => {
             setContainerDimensions({
-                height: window.innerHeight * 0.7,
+                height: window.innerHeight * 0.8,
             });
         };
 
