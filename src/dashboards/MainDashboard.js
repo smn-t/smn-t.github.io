@@ -4,7 +4,6 @@ import LineChart from '../Components/LineChart';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import data from '../data.json'
-import { useTheme } from '@mui/material/styles';
 
 // Theme
 const darkTheme = createTheme({
