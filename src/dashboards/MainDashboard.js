@@ -45,7 +45,7 @@ const calculateSMA = (data, windowSize) => {
     return smaData;
 };
 
-const findIntersections = (data) => {
+/*const findIntersections = (data) => {
     let intersections = [];
     for (let i = 1; i < data.length; i++) {
         const prev = data[i - 1];
@@ -62,7 +62,7 @@ const findIntersections = (data) => {
         }
     }
     return intersections;
-};
+};*/
 
 // Main App
 const MainDashboard = () => {
@@ -85,7 +85,7 @@ const MainDashboard = () => {
 
 
     const smaData = calculateSMA(reformatedData, sliderValue);
-    const intersections = findIntersections(smaData);
+    // const intersections = findIntersections(smaData);
 
     const current_price =  Math.round((smaData.length > 0 ? smaData.at(-1)["price"] : null)*100)/100;
     const current_sma = Math.round((smaData.length > 0 ? smaData.at(-1)["sma"] : null)*100)/100;
