@@ -14,17 +14,13 @@ const darkTheme = createTheme({
             light: '#001d3d', // Light shade of primary color
             dark: '#000814', // Dark shade of primary color
         },
-        secondary: {
-            main: '#ffc300', // Set secondary color
-            light: '#ffd60a', // Light shade of secondary color
-        },
         background: {
             default: '#000814', // Background color
-            paper: '#001d3d', // Paper (card) color
+            paper: '#0B192C', // Paper (card) color
         },
         text: {
-            primary: '#ffd60a', // Primary text color
-            secondary: '#ffc300', // Secondary text color
+            primary: '#FFFFFF', // Primary text color
+            secondary: '#FF6500', // Secondary text color
         },
     },
 });
