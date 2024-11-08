@@ -1,0 +1,25 @@
+name: Notify Investors
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: install python packages
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+- name: execute py script
+        env:
+          telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
+        run: |
+          cd scripts
+          python3 notify.py
+          echo "Done"
