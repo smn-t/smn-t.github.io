@@ -1,9 +1,10 @@
 import React from 'react';
-import { Container, Grid, Paper, Typography } from '@mui/material';
+import { Container, Grid, Paper, Typography, Slider } from '@mui/material';
 import LineChart from '../Components/LineChart';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import data from '../data.json'
+import { useTheme } from '@mui/material/styles';
 
 // Theme
 const darkTheme = createTheme({
@@ -25,11 +26,53 @@ const darkTheme = createTheme({
     },
 });
 
+
+const calculateSMA = (data, windowSize) => {
+    // Sortiere die Daten nach unixTimeStamp
+    const sortedData = [...data].sort((a, b) => a.unixTimeStamp - b.unixTimeStamp);
+
+    let smaData = [];
+    for (let i = 0; i < sortedData.length; i++) {
+        if (i < windowSize - 1) {
+            smaData.push({ ...sortedData[i], sma: null });
+        } else {
+            const windowSlice = sortedData.slice(i - windowSize + 1, i + 1);
+            const sum = windowSlice.reduce((acc, val) => acc + val.price, 0);
+            const average = sum / windowSize;
+            smaData.push({ ...sortedData[i], sma: average });
+        }
+    }
+    return smaData;
+};
+
+const findIntersections = (data) => {
+    let intersections = [];
+    for (let i = 1; i < data.length; i++) {
+        const prev = data[i - 1];
+        const current = data[i];
+        if (prev.sma !== null && current.sma !== null) {
+            // Prüfe, ob die Linien sich überschneiden
+            if ((prev.price < prev.sma && current.price > current.sma) ||
+                (prev.price > prev.sma && current.price < current.sma)) {
+                intersections.push({
+                    unixTimeStamp: current.unixTimeStamp,
+                    price: current.price,
+                });
+            }
+        }
+    }
+    return intersections;
+};
+
 // Main App
 const MainDashboard = () => {
+    const [sliderValue, setSliderValue] = React.useState(200);
 
-
-    console.log(data);
+    const handleChange = (event, newValue) => {
+        if (typeof newValue === 'number') {
+            setSliderValue(newValue);
+        }
+    };
 
 
     const reformatedData = data["Time Series (Daily)"]
@@ -41,10 +84,13 @@ const MainDashboard = () => {
         : [];
 
 
-    const current_price = reformatedData.length > 0 ? reformatedData.at(0)["price"] : null;
+    const smaData = calculateSMA(reformatedData, sliderValue);
+    const intersections = findIntersections(smaData);
+
+    const current_price =  Math.round((smaData.length > 0 ? smaData.at(-1)["price"] : null)*100)/100;
+    const current_sma = Math.round((smaData.length > 0 ? smaData.at(-1)["sma"] : null)*100)/100;
 
 
-    console.log(current_price);
 
     return (
         <ThemeProvider theme={darkTheme}>
@@ -65,8 +111,8 @@ const MainDashboard = () => {
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
                         <Paper >
-                            <Typography variant="h6" paddingInline={1}>200SMA</Typography>
-                            <Typography variant="h4" paddingInline={1}>{130}</Typography>
+                            <Typography variant="h6" paddingInline={1}>{sliderValue}SMA</Typography>
+                            <Typography variant="h4" paddingInline={1}>{current_sma}</Typography>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
@@ -83,7 +129,12 @@ const MainDashboard = () => {
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <Paper >
-                            <LineChart data={reformatedData} />
+                            <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" min={0} max={smaData.length} value={sliderValue}  onChange={handleChange} color='#FF6500'/>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={12} md={12}>
+                        <Paper >
+                            <LineChart data={smaData} />
                         </Paper>
                     </Grid>
                 </Grid>
