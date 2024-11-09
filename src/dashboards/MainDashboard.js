@@ -166,7 +166,7 @@ const MainDashboard = () => {
                                 aria-label="Default"
                                 valueLabelDisplay="auto"
                                 min={0}
-                                max={300}
+                                max={marks[marks.length-1].value}
                                 value={sliderValue}
                                 onChange={handleChange}
                                 color="primary"
