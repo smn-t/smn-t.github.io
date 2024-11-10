@@ -109,12 +109,14 @@ const MainDashboard = () => {
     const current_sma = Math.round((smaData.length > 0 ? smaData.at(-1)["sma"] : null) * 100) / 100;
     const difference = Math.round((current_price - current_sma) * 100) / 100;
 
+    console.log(data["Meta Data"]["2. Symbol"]);
+
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <Container maxWidth={false}>
                 <Typography variant="h4" paddingTop={3} paddingInline={2}>
-                    Der heilige Amumbo
+                    Der heilige Amumbo - {data["Meta Data"]["2. Symbol"]} (Last Update: {data["Meta Data"]["3. Last Refreshed"]})
                 </Typography>
                 <Typography variant="body2" paddingInline={2}>
                     <i>Keine Anlageberatung!</i>
