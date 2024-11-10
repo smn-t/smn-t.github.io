@@ -113,34 +113,34 @@ const MainDashboard = () => {
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
             <Container maxWidth={false}>
-                <Typography variant="h3" paddingTop={3} paddingBottom={1} paddingInline={2}>
+                <Typography variant="h4" paddingTop={3} paddingInline={2}>
                     Der heilige Amumbo
                 </Typography>
-                <Typography variant="h8" paddingInline={2}>
-                    <i>"Cry rich or try dying!"</i> - 50 Cent (angelsächsischer Sprechgesangskünstler)
+                <Typography variant="body2" paddingInline={2}>
+                    <i>Keine Anlageberatung!</i>
                 </Typography>
                 <Grid container spacing={2} padding={2}>
                     <Grid item xs={12} sm={6} md={3}>
-                        <Paper sx={{ height: '98%'}}>
-                            <Typography variant="h6" paddingInline={1}>Current</Typography>
-                            <Typography variant="h4" paddingInline={1}>{current_price}</Typography>
+                        <Paper sx={{height: 70}}>
+                            <Typography variant="overline" paddingInline={1}>Current</Typography>
+                            <Typography variant="h5" paddingInline={1}>{current_price}</Typography>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
-                        <Paper sx={{ height: '98%'}}>
-                            <Typography variant="h6" paddingInline={1}>{sliderValue}SMA</Typography>
-                            <Typography variant="h4" paddingInline={1}>{current_sma}</Typography>
+                        <Paper sx={{height: 70}}>
+                            <Typography variant="overline" paddingInline={1}>{sliderValue}SMA</Typography>
+                            <Typography variant="h5" paddingInline={1}>{current_sma}</Typography>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
-                        <Paper sx={{ height: '98%', color: difference > 0 ? 'red' : 'green'}}>
-                            <Typography variant="h6" paddingInline={1}>Expert Rating</Typography>
-                            <Typography variant="h4" paddingInline={1}> {difference > 0 ? `Sell` : `Buy`}</Typography>
+                        <Paper sx={{height: 70, color: difference > 0 ? 'red' : 'green'}}>
+                            <Typography variant="overline" paddingInline={1}>Expert Rating</Typography>
+                            <Typography variant="h5" paddingInline={1}> {difference > 0 ? `Sell` : `Buy`}</Typography>
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={6} md={3}>
-                        <Paper sx={{ height: '98%', paddingInline: 1 }}>
-                            <FormControl fullWidth variant="outlined" sx={{ mt: 1 }}>
+                        <Paper sx={{ height: 70, paddingInline: 1 }}>
+                            <FormControl fullWidth variant="outlined" sx={{ mt: 1, height: 80}}>
                                 <InputLabel id="time-period-label">Select Period</InputLabel>
                                 <Select
                                     labelId="time-period-label"
@@ -148,6 +148,7 @@ const MainDashboard = () => {
                                     value={timePeriod}
                                     onChange={handleTimePeriodChange}
                                     label="Select Period"
+
                                 >
                                     <MenuItem value="full">Full</MenuItem>
                                     <MenuItem value="2year">2 Year</MenuItem> {/* Neue Option "2 Year" */}
@@ -160,7 +161,7 @@ const MainDashboard = () => {
                         </Paper>
                     </Grid>
                     <Grid item xs={12} sm={9} md={11}>
-                        <Paper sx={{ paddingInline: 4 }}>
+                        <Paper sx={{ paddingInline: 4, height: 55}}>
                             <Slider
                                 defaultValue={50}
                                 aria-label="Default"
@@ -176,7 +177,7 @@ const MainDashboard = () => {
                         </Paper>
                     </Grid>
                     <Grid container item xs={12} sm={3} md={1} justifyContent="center" alignItems="center">
-                        <Button onClick={() => { setSliderValue(200); setTimePeriod("full")}} variant="contained" color="success"> Reset </Button>
+                        <Button onClick={() => { setSliderValue(200); setTimePeriod("full")}} variant="contained" color="error" sx={{height: 55}}> Reset </Button>
                     </Grid>
                     <Grid item xs={12} md={12}>
                         <Paper>
