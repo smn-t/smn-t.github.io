@@ -9,7 +9,6 @@ import {
     Tooltip,
     Label
 } from 'recharts';
-import { useTheme } from '@mui/material/styles';
 
 
 const CustomLineChart = ({ data }) => {
