@@ -13,7 +13,6 @@ import { useTheme } from '@mui/material/styles';
 
 
 const CustomLineChart = ({ data }) => {
-    const theme = useTheme();
 
     const [containerDimensions, setContainerDimensions] = useState({
         height: window.innerHeight * 0.75,
