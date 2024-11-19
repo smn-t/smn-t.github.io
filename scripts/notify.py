@@ -27,10 +27,10 @@ df['200_sma'] = df['4. close'].rolling(window=200).mean()
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 genai.configure(api_key=GEMINI_TOKEN)
-model = genai.GenerativeModel("gemini-1.5-flash-8b")
+model = genai.GenerativeModel("gemini-1.5-pro")
 prompt = r'''
-Schreibe eine kurze, präzise, lockere Chat-Nachricht an die Investoren.
-Schreibe wie eine Nutzer des Subreddits "Mauerstrassenwetten"
+Schreibe eine kurze, präzise, lockere Telegramm-Chat-Nachricht an die Investoren.
+Schreibe wie ein risikofreudiger Nutzer des Subreddits "Mauerstrassenwetten"
 Benutze hierbei die gegeben Zeitreihe, vergleiche den Kurs mit dem sma200, gib ein Update wie der Titel "Amundi ETF Leveraged MSCI USA Daily UCITS ETF EUR" aktuell performt.
 Nenne aktuell Werte und gib eine Prognose ab.
 Die Zeitreihe: {0}
