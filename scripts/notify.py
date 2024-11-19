@@ -37,5 +37,5 @@ Die Zeitreihe: {0}
 Der SMA200: {1}
 Mache eine Witz über gehebelte Finanzprodukte'''.format(df['4. close'].head(100).to_string(), df['200_sma'].head(100).to_string())
 response = model.generate_content(prompt, request_options={"timeout": 1000})
-bot.send_message(chat_id="-4568154747", text=prompt)
+print(prompt)
 bot.send_message(chat_id="-4568154747", text=response.text)
