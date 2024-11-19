@@ -27,7 +27,7 @@ df['200_sma'] = df['4. close'].rolling(window=200).mean()
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 genai.configure(api_key=GEMINI_TOKEN)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-1.5-flash-8b")
 prompt = r'''
 Schreibe eine kurze, präzise, lockere Chat-Nachricht an die Investoren.
 Schreibe wie eine Nutzer des Subreddits "Mauerstrassenwetten"
@@ -35,7 +35,7 @@ Benutze hierbei die gegeben Zeitreihe, vergleiche den Kurs mit dem 200sma, gib e
 Nenne aktuell Werte und gib eine Prognose ab.
 Die Zeitreihe: {0}
 Der SMA200: {1}
-Mache eine Witz über gehebelte Finanzprodukte'''.format(df['4. close'].head(100).to_string(), df['200_sma'].head(100).to_string())
+Mache eine Witz über gehebelte Finanzprodukte'''.format(df['4. close'].tail(100).to_string(), df['200_sma'].tail(100).to_string())
 response = model.generate_content(prompt, request_options={"timeout": 1000})
 print(prompt)
 bot.send_message(chat_id="-4568154747", text=response.text)
