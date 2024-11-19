@@ -27,7 +27,7 @@ df['200_sma'] = df['4. close'].rolling(window=200).mean()
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 genai.configure(api_key=GEMINI_TOKEN)
-model = genai.GenerativeModel("gemini-1.0-pro")
+model = genai.GenerativeModel("gemini-1.5-pro")
 prompt = r'''
 Schreibe eine kurze, präzise, lockere Telegramm-Chat-Nachricht an die Investoren.
 Schreibe wie ein risikofreudiger Nutzer des Subreddits "Mauerstrassenwetten"
