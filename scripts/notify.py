@@ -31,11 +31,13 @@ model = genai.GenerativeModel("gemini-1.5-flash-8b")
 prompt = r'''
 Schreibe eine kurze, präzise, lockere Chat-Nachricht an die Investoren.
 Schreibe wie eine Nutzer des Subreddits "Mauerstrassenwetten"
-Benutze hierbei die gegeben Zeitreihe, vergleiche den Kurs mit dem 200sma, gib ein Update wie der Titel "Amundi ETF Leveraged MSCI USA Daily UCITS ETF EUR" aktuell performt.
+Benutze hierbei die gegeben Zeitreihe, vergleiche den Kurs mit dem sma200, gib ein Update wie der Titel "Amundi ETF Leveraged MSCI USA Daily UCITS ETF EUR" aktuell performt.
 Nenne aktuell Werte und gib eine Prognose ab.
 Die Zeitreihe: {0}
 Der SMA200: {1}
-Mache eine Witz über gehebelte Finanzprodukte'''.format(df['4. close'].tail(100).to_string(), df['200_sma'].tail(100).to_string())
+Heute ist der {2}
+Baue ein Witz über gehebelte Finanzprodukte ein.
+Spare dir den Risiko Hinweis, ist bereits bekannt'''.format(df['4. close'].tail(100).to_string(), df['200_sma'].tail(100).to_string(), df['4. close'].tail(1).index)
 response = model.generate_content(prompt, request_options={"timeout": 1000})
 print(prompt)
 bot.send_message(chat_id="-4568154747", text=response.text)
