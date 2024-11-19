@@ -32,5 +32,7 @@ response = model.generate_content([r'''
 Schreibe eine kurze, präzise, lockere Chat-Nachricht an die Investoren. 
 Benutze hierbei die gegeben Zeitreihe, vergleiche den Kurs mit dem 200sma, gib ein Update wie der Titel "Amundi ETF Leveraged MSCI USA Daily UCITS ETF EUR" aktuell performt.
 Nenne aktuell Werte und gib eine Prognose ab.
-Mache eine Witz über gehebelte Finanzprodukte''', df['4. close'].to_string()] , request_options={"timeout": 1000})
+Die Zeitreihe: {0}
+Der SMA200: {1}
+Mache eine Witz über gehebelte Finanzprodukte'''.format(df['4. close'].to_string(), df['200_sma'].to_string() )] , request_options={"timeout": 1000})
 bot.send_message(chat_id="-4568154747", text=response.text)
