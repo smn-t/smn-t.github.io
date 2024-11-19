@@ -2,8 +2,8 @@ name: Fetch Data and Deploy
 
 on:
   schedule:
-    - cron: "0 8 * * *"  # Läuft täglich um 08:00 Uhr (UTC)
-  workflow_dispatch: # Manuelles Auslösen
+    - cron: "0 20 * * *"
+  workflow_dispatch:
   push:
 
 jobs:
