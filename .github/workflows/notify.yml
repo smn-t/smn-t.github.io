@@ -22,6 +22,7 @@ jobs:
       - name: execute py script
         env:
           telegram_token: ${{ secrets.TELEGRAM_TOKEN }}
+          gemini_token: ${{ secrets.GEMINI_TOKEN }}
         run: |
           python3 scripts/notify.py
           echo "Done"

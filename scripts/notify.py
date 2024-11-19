@@ -2,8 +2,10 @@ import json
 import os
 import pandas as pd
 import telegram
+import google.generativeai as genai
 
 TELEGRAM_TOKEN = os.environ["telegram_token"]
+GEMINI_TOKEN = os.environ["gemini_token"]
 
 def load_json(file_path):
     with open(file_path, 'r') as file:
@@ -24,21 +26,7 @@ df['200_sma'] = df['4. close'].rolling(window=200).mean()
 
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
-bot.send_message(chat_id="-4568154747", text='Guten Morgen! Hier ist der aktuelle Stand!')
-
-if df['4. close'][-1] > df['200_sma'][-1]:
-    bot.send_message(chat_id="-4568154747", text=
-                     r'''
-                     Der 200 days simple moving average liegt unter dem aktuellen Preis!
-Aktueller Preis: {0}€
-200 SMA: {1}€'''.format(df['4. close'][-1], df['200_sma'][-1]))
-elif df['4. close'][-1] < df['200_sma'][-1]:
-    bot.send_message(chat_id="-4568154747", text=
-                     r'''
-                    Der 200 days simple moving average liegt über dem aktuellen Preis!
-Aktueller Preis: {0}€
-200 SMA: {1}€
-Starkes Kaufsignal!'''.format(df['4. close'][-1], df['200_sma'][-1]))
-else:
-    bot.send_message(chat_id="-4568154747", text='Hier passt was nicht...')
-
+genai.configure(api_key=GEMINI_TOKEN)
+model = genai.GenerativeModel("gemini-1.5-flash")
+response = model.generate_content(["Schreibe eine humorvolle Nachricht an die Investoren. Benutze hierbei die Zeitreihe und den 200SMA, gib ein Update wie der Amumbo aktuell performt und einen kleinen Ausblick", df['4. close'].to_string(), df['200_sma'].to_string()] , request_options={"timeout": 1000})
+bot.send_message(chat_id="-4568154747", text=response.text)
