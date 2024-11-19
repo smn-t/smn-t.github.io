@@ -28,5 +28,8 @@ bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 genai.configure(api_key=GEMINI_TOKEN)
 model = genai.GenerativeModel("gemini-1.5-flash")
-response = model.generate_content(["Schreibe eine humorvolle Nachricht an die Investoren. Benutze hierbei die Zeitreihe und den 200SMA, gib ein Update wie der Amumbo aktuell performt und einen kleinen Ausblick", df['4. close'].to_string(), df['200_sma'].to_string()] , request_options={"timeout": 1000})
+response = model.generate_content([r'''
+Schreibe eine Chat-Nachricht an die Investoren. 
+Benutze hierbei die Zeitreihe und den 200SMA, gib ein Update wie der Titel "Amundi ETF Leveraged MSCI USA Daily UCITS ETF EUR" aktuell performt und einen kleinen Ausblick.
+Nenne aktuell Werte und gib eine Prognose ab.''', df['4. close'].to_string(), df['200_sma'].to_string()] , request_options={"timeout": 1000})
 bot.send_message(chat_id="-4568154747", text=response.text)
