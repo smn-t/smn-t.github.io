@@ -37,7 +37,8 @@ Die Zeitreihe: {0}
 Der SMA200: {1}
 Heute ist der {2}
 Baue ein Witz über gehebelte Finanzprodukte ein.
-Spare dir den Risiko Hinweis, ist bereits bekannt'''.format(df['4. close'].tail(100).to_string(), df['200_sma'].tail(100).to_string(), df['4. close'].tail(1).index)
+Spare dir den Risiko Hinweis, ist bereits bekannt.
+
+Empfehle zusätzlich ein hochriskantes, gehebeltes Finanzprodukt (bspw. Optionen oder Derivate) mit WKN im typischen mauerstrassen Sprech.'''.format(df['4. close'].tail(100).to_string(), df['200_sma'].tail(100).to_string(), df['4. close'].tail(1).index)
 response = model.generate_content(prompt, request_options={"timeout": 1000})
-print(prompt)
 bot.send_message(chat_id="-4568154747", text=response.text)
