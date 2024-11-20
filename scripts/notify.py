@@ -36,8 +36,7 @@ Nenne aktuell Werte und gib eine Prognose ab.
 Die Zeitreihe: {0}
 Der SMA200: {1}
 Heute ist der {2}
-Hinweis: hier wird "." als decimal separator verwendet.
 Baue ein Witz über gehebelte Finanzprodukte ein.
-Spare dir den Risiko Hinweis, ist bereits bekannt.'''.format(df['4. close'].tail(100).to_string(), df['200_sma'].tail(100).to_string(), df['4. close'].tail(1).index)
+Spare dir den Risiko Hinweis, ist bereits bekannt.'''.format(df['4. close'].tail(100).to_string().replace(".", ","), df['200_sma'].tail(100).to_string().replace(".", ","), df['4. close'].tail(1).index)
 response = model.generate_content(prompt, request_options={"timeout": 1000})
 bot.send_message(chat_id="-4568154747", text=response.text)
