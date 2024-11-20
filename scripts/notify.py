@@ -30,7 +30,7 @@ genai.configure(api_key=GEMINI_TOKEN)
 model = genai.GenerativeModel("gemini-1.5-pro")
 prompt = r'''
 Schreibe eine kurze, präzise, lockere Telegramm-Chat-Nachricht an die Investoren.
-Schreibe wie ein degenerierter Nutzer des Subreddits "Mauerstrassenwetten"
+Schreibe das update wie christian lindner.
 Benutze hierbei die gegeben Zeitreihe, vergleiche den Kurs mit dem sma200, gib ein Update wie der Titel "Amundi ETF Leveraged MSCI USA Daily UCITS ETF EUR" aktuell performt und gib die Änderung zum Vortag in % an.
 Nenne aktuell Werte und gib eine Prognose ab.
 Die Zeitreihe: {0}
