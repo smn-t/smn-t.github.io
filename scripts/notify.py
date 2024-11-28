@@ -29,7 +29,7 @@ bot = telegram.Bot(token=TELEGRAM_TOKEN)
 genai.configure(api_key=GEMINI_TOKEN)
 model = genai.GenerativeModel("gemini-1.5-pro")
 prompt = r'''
-Schreibe eine möglichst depressive Telegramm-Chat-Nachricht über den Kurs des ETFs.
+Schreibe eine Telegramm-Chat-Nachricht über den Kurs des ETFs.
 Benutze hierbei die gegeben Zeitreihe, vergleiche den Kurs mit dem sma200, gib ein Update wie der Titel "Amundi ETF Leveraged MSCI USA Daily UCITS ETF EUR" aktuell performt und gib die Änderung zum Vortag in % an.
 Nenne den aktuellen Wert und den Wert vom Vortag und gib eine Prognose ab. Die Trading Strategie ist der simple moving average über 200 Tage, ordne das Signal ein.
 Die Zeitreihe: {0}
