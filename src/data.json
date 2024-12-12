@@ -2,11 +2,18 @@
     "Meta Data": {
         "1. Information": "Daily Prices (open, high, low, close) and Volumes",
         "2. Symbol": "18MF.DEX",
-        "3. Last Refreshed": "2024-12-11",
+        "3. Last Refreshed": "2024-12-12",
         "4. Output Size": "Full size",
         "5. Time Zone": "US/Eastern"
     },
     "Time Series (Daily)": {
+        "2024-12-12": {
+            "1. open": "25.9000",
+            "2. high": "26.1150",
+            "3. low": "25.7800",
+            "4. close": "25.9400",
+            "5. volume": "41649"
+        },
         "2024-12-11": {
             "1. open": "25.6350",
             "2. high": "26.0600",
