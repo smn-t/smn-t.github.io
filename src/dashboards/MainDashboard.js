@@ -4,6 +4,7 @@ import LineChart from '../Components/LineChart';
 import { ThemeProvider, CssBaseline } from '@mui/material';
 import data from '../data.json';
 import modernDarkTheme from '../Theme/modernDarkTheme';
+import SmaChart from '../Components/SmaChart';
 
 const marks = [
   { value: 25, label: '25' },
@@ -141,7 +142,7 @@ const MainDashboard = () => {
           </Grid>
           <Grid item xs={12} md={12}>
             <Paper>
-              <LineChart data={smaData} />
+              <SmaChart data={smaData} />
             </Paper>
           </Grid>
         </Grid>
