@@ -5,7 +5,6 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import data from '../data.json';
 import modernDarkTheme from '../Theme/modernDarkTheme';
 import SmaChart from '../Components/SmaChart';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const marks = [
   { value: 25, label: '25' },
