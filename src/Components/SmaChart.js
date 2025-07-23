@@ -42,24 +42,20 @@ const SmaChart = ({ data }) => {
           }}
         >
           <p style={{ margin: 0, fontSize: "0.9rem", fontWeight: 500 }}>
-            <span style={{ color: "#0D6EFD" }}>Date:</span>{" "}
-            {new Date(label).toLocaleDateString()}
+            <span style={{ color: "#0D6EFD" }}>SMA:</span>{" "}
+            {label}
           </p>
           <p style={{ margin: 0, fontSize: "0.9rem", fontWeight: 500 }}>
-            <span style={{ color: "#FFA726" }}>Price:</span>{" "}
+            <span style={{ color: "#FFA726" }}>Value:</span>{" "}
             {payload[0].value.toFixed(2)} €
           </p>
-          {payload[1] && (
-            <p style={{ margin: 0, fontSize: "0.9rem", fontWeight: 500 }}>
-              <span style={{ color: "#FF6500" }}>SMA:</span>{" "}
-              {payload[1].value.toFixed(2)} €
-            </p>
-          )}
         </div>
       );
     }
     return null;
   };
+
+  console.log("SMA Chart Data:", data);
 
   return (
     <ResponsiveContainer width="100%" height={containerHeight}>
@@ -67,19 +63,18 @@ const SmaChart = ({ data }) => {
         <CartesianGrid strokeDasharray="5 5" stroke={theme.palette.text.disabled} />
         <XAxis
           type="number"
-          dataKey="unixTimeStamp"
+          dataKey="sma"
           domain={["dataMin", "dataMax"]}
-          tickFormatter={(unixTime) => new Date(unixTime).toLocaleDateString()}
           stroke={theme.palette.text.primary}
           dy={5}
         >
-          <Label value="Date" position="insideBottom" offset={-15} fill={theme.palette.text.primary} />
+          <Label value="SMA Window Size" position="insideBottom" offset={-15} fill={theme.palette.text.primary} />
         </XAxis>
         <YAxis type="number" stroke={theme.palette.text.primary} dx={-5}>
-          <Label value="Price" position="insideLeft" angle={-90} offset={0} fill={theme.palette.text.primary} />
+          <Label value="Value" position="insideLeft" angle={-90} offset={0} fill={theme.palette.text.primary} />
         </YAxis>
         <Tooltip content={<CustomTooltip />} />
-        <Line dataKey="price" dot={false} stroke={theme.palette.warning.main} />
+        <Line dataKey="value" dot={false} stroke={theme.palette.warning.main} />
       </LineChart>
     </ResponsiveContainer>
   );

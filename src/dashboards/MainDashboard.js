@@ -5,6 +5,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import data from '../data.json';
 import modernDarkTheme from '../Theme/modernDarkTheme';
 import SmaChart from '../Components/SmaChart';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 
 const marks = [
   { value: 25, label: '25' },
@@ -30,6 +31,27 @@ const calculateSMA = (data, windowSize) => {
   });
 };
 
+
+const getSMAForTimestamp =(data, windowSize, unixTimeStamp) =>{
+  const sorted = [...data].sort((a, b) => a.unixTimeStamp - b.unixTimeStamp);
+  const idx = sorted.findIndex(item => item.unixTimeStamp === unixTimeStamp);
+  if (idx < windowSize - 1 || idx === -1) return null;
+  const windowSlice = sorted.slice(idx - windowSize + 1, idx + 1);
+  const average = windowSlice.reduce((acc, val) => acc + val.price, 0) / windowSize;
+  return average;
+}
+
+
+const getSMAForAllWindows = (data, unixTimeStamp, min = 50, max = 500, step = 1) => {
+  const result = [];
+  for (let windowSize = min; windowSize <= max; windowSize += step) {
+    const sma = getSMAForTimestamp(data, windowSize, unixTimeStamp);
+    result.push({ sma: windowSize, value: sma });
+  }
+  return result;
+}
+
+
 const sliceData = (data, period) => {
   const now = Date.now();
   const periods = {
@@ -48,6 +70,7 @@ const sliceData = (data, period) => {
 const MainDashboard = () => {
   const [sliderValue, setSliderValue] = useState(200);
   const [timePeriod, setTimePeriod] = useState('full');
+
 
   const handleChange = (event, newValue) => {
     if (typeof newValue === 'number') {
@@ -70,6 +93,10 @@ const MainDashboard = () => {
   const current_price = smaData.length > 0 ? smaData.at(-1).price.toFixed(2) : null;
   const current_sma = smaData.length > 0 ? smaData.at(-1).sma.toFixed(2) : null;
   const difference = current_price && current_sma ? (current_price - current_sma).toFixed(2) : null;
+
+  // Beispiel-Nutzung:
+ const smaAll = getSMAForAllWindows(reformatedData, Date.parse(data["Meta Data"]["3. Last Refreshed"]), 50, 500, 1);
+
 
   return (
     <ThemeProvider theme={modernDarkTheme}>
@@ -140,11 +167,16 @@ const MainDashboard = () => {
           <Grid container item xs={12} sm={3} md={1} justifyContent="center" alignItems="center">
             <Button fullWidth onClick={() => { setSliderValue(200); setTimePeriod("full") }} variant="contained" color="error" sx={{ height: 55 }}> Reset </Button>
           </Grid>
-          <Grid item xs={12} md={12}>
+          <Grid item xs={8} md={8}>
             <Paper>
-              <SmaChart data={smaData} />
+              <LineChart data={smaData} />
             </Paper>
           </Grid>
+          <Grid item xs={4} md={4}>
+          <Paper>
+            <SmaChart data={smaAll} />
+          </Paper>
+        </Grid>
         </Grid>
       </Container>
     </ThemeProvider>
