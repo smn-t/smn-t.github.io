@@ -41,10 +41,10 @@ const getSMAForTimestamp =(data, windowSize, unixTimeStamp) =>{
 }
 
 
-const getSMAForAllWindows = (data, unixTimeStamp, min = 50, max = 500, step = 1) => {
+const getSMAForAllWindows = (data, unixTimeStamp, min = 50, max = 500, step = 1, current_price) => {
   const result = [];
   for (let windowSize = min; windowSize <= max; windowSize += step) {
-    const sma = getSMAForTimestamp(data, windowSize, unixTimeStamp);
+    const sma = getSMAForTimestamp(data, windowSize, unixTimeStamp) - current_price;
     result.push({ sma: windowSize, value: sma });
   }
   return result;
@@ -94,7 +94,7 @@ const MainDashboard = () => {
   const difference = current_price && current_sma ? (current_price - current_sma).toFixed(2) : null;
 
   // Beispiel-Nutzung:
- const smaAll = getSMAForAllWindows(reformatedData, Date.parse(data["Meta Data"]["3. Last Refreshed"]), 50, 500, 1);
+ const smaAll = getSMAForAllWindows(reformatedData, Date.parse(data["Meta Data"]["3. Last Refreshed"]), 50, 500, 1, current_price);
 
 
   return (
