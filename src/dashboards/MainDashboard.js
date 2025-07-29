@@ -5,6 +5,7 @@ import { ThemeProvider, CssBaseline } from '@mui/material';
 import data from '../data.json';
 import modernDarkTheme from '../Theme/modernDarkTheme';
 import SmaChart from '../Components/SmaChart';
+import { Checkbox, FormControlLabel } from '@mui/material';
 
 const marks = [
   { value: 25, label: '25' },
@@ -40,15 +41,18 @@ const getSMAForTimestamp =(data, windowSize, unixTimeStamp) =>{
   return average;
 }
 
-
 const getSMAForAllWindows = (data, unixTimeStamp, min = 50, max = 500, step = 1, current_price) => {
   const result = [];
-  for (let windowSize = min; windowSize <= max; windowSize += step) {
-    const sma = getSMAForTimestamp(data, windowSize, unixTimeStamp) - current_price;
+  const maxWindowSize = Math.min(max, data.length); // maximal mögliche Fenstergröße
+
+  for (let windowSize = min; windowSize <= maxWindowSize; windowSize += step) {
+    const smaVal = getSMAForTimestamp(data, windowSize, unixTimeStamp);
+    if (smaVal === null) continue; // Falls für das Fenster kein SMA möglich, überspringen
+    const sma = smaVal - current_price;
     result.push({ sma: windowSize, value: sma });
   }
   return result;
-}
+};
 
 
 const sliceData = (data, period) => {
@@ -66,10 +70,18 @@ const sliceData = (data, period) => {
   return data.filter(item => now - item.unixTimeStamp <= periods[period]);
 };
 
+
 const MainDashboard = () => {
   const [sliderValue, setSliderValue] = useState(200);
   const [timePeriod, setTimePeriod] = useState('full');
+  const [hoverData, setHoverData] = useState({ unixTimeStamp: Date.parse(data["Meta Data"]["3. Last Refreshed"]), price: null });
+  const [hoverFeatureEnabled, setHoverFeatureEnabled] = useState(false);
 
+const handleHoverChange = (data) => {
+  if (hoverFeatureEnabled && data) {
+    setHoverData(data);
+  }
+};
 
   const handleChange = (event, newValue) => {
     if (typeof newValue === 'number') {
@@ -93,8 +105,10 @@ const MainDashboard = () => {
   const current_sma = smaData.length > 0 ? smaData.at(-1).sma.toFixed(2) : null;
   const difference = current_price && current_sma ? (current_price - current_sma).toFixed(2) : null;
 
-  // Beispiel-Nutzung:
- const smaAll = getSMAForAllWindows(reformatedData, Date.parse(data["Meta Data"]["3. Last Refreshed"]), 50, 500, 1, current_price);
+const activeTimestamp = hoverFeatureEnabled ? hoverData.unixTimeStamp : Date.parse(data["Meta Data"]["3. Last Refreshed"]);
+const activePrice = hoverFeatureEnabled ? (hoverData.price ?? current_price) : current_price;
+
+const smaAll = getSMAForAllWindows(reformatedData, activeTimestamp, 50, 500, 1, activePrice);
 
 
   return (
@@ -147,7 +161,7 @@ const MainDashboard = () => {
               </FormControl>
             </Paper>
           </Grid>
-          <Grid item xs={12} sm={9} md={11}>
+          <Grid item xs={12} sm={7} md={9}>
             <Paper sx={{ paddingInline: 4, height: 55 }}>
               <Slider
                 defaultValue={50}
@@ -163,12 +177,37 @@ const MainDashboard = () => {
               />
             </Paper>
           </Grid>
-          <Grid container item xs={12} sm={3} md={1} justifyContent="center" alignItems="center">
-            <Button fullWidth onClick={() => { setSliderValue(200); setTimePeriod("full") }} variant="contained" color="error" sx={{ height: 55 }}> Reset </Button>
+          <Grid item xs={12} sm={2} md={1}>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={hoverFeatureEnabled}
+                  onChange={(e) => setHoverFeatureEnabled(e.target.checked)}
+                  color="primary"
+                />
+              }
+              label="Live SMA Calculation"
+              sx={{ pl: 1 }}
+            />
+          </Grid>
+          <Grid container item xs={12} sm={3} md={2} justifyContent="center" alignItems="center">
+            <Button
+              fullWidth
+              onClick={() => {
+                setSliderValue(200);
+                setTimePeriod("full");
+                setHoverFeatureEnabled(false);
+              }}
+              variant="contained"
+              color="error"
+              sx={{ height: 55 }}
+            >
+              Reset
+            </Button>
           </Grid>
           <Grid item xs={8} md={8}>
             <Paper>
-              <LineChart data={smaData} />
+              <LineChart data={smaData} onHoverChange={handleHoverChange} />
             </Paper>
           </Grid>
           <Grid item xs={4} md={4}>

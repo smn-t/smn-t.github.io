@@ -11,7 +11,7 @@ import {
 } from "recharts";
 import { useTheme } from "@mui/material/styles";
 
-const CustomLineChart = ({ data }) => {
+const CustomLineChart = ({ data, onHoverChange  }) => {
   const theme = useTheme();
 
   const [containerHeight, setContainerHeight] = useState(window.innerHeight * 0.75);
@@ -61,9 +61,19 @@ const CustomLineChart = ({ data }) => {
     return null;
   };
 
+  const handleMouseMove = (state) => {
+    if (state.isTooltipActive && state.activePayload && state.activePayload.length > 0) {
+      const payload = state.activePayload[0].payload;
+      onHoverChange({ unixTimeStamp: payload.unixTimeStamp, price: payload.price });
+    } else {
+      onHoverChange(null);
+    }
+  };
+
   return (
     <ResponsiveContainer width="100%" height={containerHeight}>
-      <LineChart data={data} margin={{ top: 20, right: 30, left: 25, bottom: 30 }}>
+      <LineChart data={data} margin={{ top: 20, right: 30, left: 25, bottom: 30 }} onMouseMove={handleMouseMove}
+        onMouseLeave={() => onHoverChange(null)}>
         <CartesianGrid strokeDasharray="5 5" stroke={theme.palette.text.disabled} />
         <XAxis
           type="number"
