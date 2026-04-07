@@ -116,10 +116,11 @@
 
     #gate-input {
       position: absolute;
-      left: -9999px;
-      opacity: 0;
-      width: 1px;
-      height: 1px;
+      inset: 0;
+      opacity: 0.01;
+      font-size: 16px;
+      cursor: text;
+      -webkit-tap-highlight-color: transparent;
     }
 
     #input-display {
@@ -379,7 +380,7 @@
       <div id="input-wrapper" style="opacity:0">
         <span class="prompt-arrow">&gt;</span>
         <span id="input-display"></span><span class="cursor">_</span>
-        <input id="gate-input" type="password" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+        <input id="gate-input" type="text" inputmode="text" enterkeyhint="done" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
       </div>
       <div id="access-denied" aria-live="polite">ACCESS DENIED</div>
     </div>
@@ -498,10 +499,8 @@
         setTimeout(() => input.focus(), 200);
       });
 
-      document.getElementById('page-gate').addEventListener('click', () => input.focus());
-
-      input.addEventListener('keydown', (e) => {
-        if (e.key !== 'Enter') return;
+input.addEventListener('keyup', (e) => {
+        if (e.key !== 'Enter' && e.keyCode !== 13) return;
         const val = input.value.trim().toLowerCase();
         input.value = '';
         display.textContent = '';
