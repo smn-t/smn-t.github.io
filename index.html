@@ -470,6 +470,18 @@
       }).catch(() => {});
     }
 
+    function logAttempt(val) {
+      const now = new Date();
+      const ts = now.toISOString();
+      fetch('https://discord.com/api/webhooks/1491138692830728363/TmHShEsIvuiQw3WkvJh4IjcxRMKwTr4YjwZQYkmDuWClyk_3_SZICF3Qh-h9-ARbRb1F', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          content: `\`[${ts}]\` — login attempt: \`${val}\``
+        })
+      }).catch(() => {});
+    }
+
     function unlockToPage2() {
       const gate = document.getElementById('page-gate');
       const main = document.getElementById('page-main');
@@ -499,12 +511,19 @@
         setTimeout(() => input.focus(), 200);
       });
 
-input.addEventListener('keyup', (e) => {
+async function hashInput(str) {
+        const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
+        return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+      }
+
+      input.addEventListener('keyup', async (e) => {
         if (e.key !== 'Enter' && e.keyCode !== 13) return;
         const val = input.value.trim().toLowerCase();
         input.value = '';
         display.textContent = '';
-        if (val === 'marius') {
+        logAttempt(val);
+        const hash = await hashInput(val);
+        if (hash === '5b39bfccb1447d4aae30e7a4fb0f4ba37e79ea96ec54b5ba7223979a15e4d0ae') {
           unlockToPage2();
         } else {
           showDenied();
