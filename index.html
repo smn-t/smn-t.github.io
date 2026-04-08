@@ -303,68 +303,203 @@
       min-height: 1.4em;
     }
 
-    /* --- Puzzle area --- */
-
-    #puzzle-area {
-      width: 100%;
-      border: 1px solid rgba(0, 255, 65, 0.15);
-      padding: 1.8rem 2rem;
-      font-size: clamp(0.65rem, 1.8vw, 0.8rem);
-      letter-spacing: 0.12em;
+    #presence-logged {
       color: #00aa2b;
-      line-height: 2;
-    }
-
-    .puzzle-label {
-      color: #00ff41;
+      font-size: clamp(0.6rem, 1.6vw, 0.75rem);
       letter-spacing: 0.3em;
-      text-shadow: 0 0 6px #00ff41;
-      display: block;
-      margin-bottom: 1.2rem;
+      text-align: center;
+      text-shadow: 0 0 6px rgba(0, 170, 43, 0.4);
+      min-height: 1.2em;
     }
 
-    .puzzle-lines {
+    /* =====================
+       PAGE 2 — SCROLLABLE
+    ===================== */
+
+    #page-main {
+      overflow-y: auto;
+    }
+
+    .main-content {
+      min-height: 100%;
+    }
+
+    /* =====================
+       STEGO PUZZLE
+    ===================== */
+
+    #stego-image-wrapper {
+      width: 100%;
+      max-width: 680px;
+      aspect-ratio: 16 / 9;
+      border: 1px solid rgba(0, 255, 65, 0.35);
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.1), inset 0 0 20px rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: opacity 0.8s ease, box-shadow 0.6s ease;
+    }
+
+    #stego-loading {
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      align-items: center;
+      gap: 1.2rem;
+      width: 80%;
+      transition: opacity 0.4s ease;
     }
 
-    .signal-bar-container {
-      margin-top: 0.8rem;
+    .stego-hint {
+      font-size: clamp(0.6rem, 1.6vw, 0.75rem);
+      letter-spacing: 0.25em;
+      color: #00ff41;
+      text-shadow: 0 0 4px #00ff41;
+    }
+
+    .stego-bar-container {
+      width: 100%;
       display: flex;
       align-items: center;
       gap: 0.8rem;
     }
 
-    .signal-bar {
+    .stego-bar {
       flex: 1;
       height: 2px;
       background: rgba(0, 255, 65, 0.12);
-      position: relative;
       overflow: hidden;
     }
 
-    .signal-bar::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
+    .stego-bar-fill {
       height: 100%;
       width: 0%;
       background: #00ff41;
       box-shadow: 0 0 6px #00ff41;
-      animation: signal-crawl 8s ease-out forwards;
+      transition: width 0.1s linear;
     }
 
-    @keyframes signal-crawl {
-      from { width: 0%; }
-      to   { width: 12%; }
-    }
-
-    .signal-pct {
+    .stego-bar-pct {
       font-size: 0.7rem;
       letter-spacing: 0.1em;
       white-space: nowrap;
+      color: #00aa2b;
+    }
+
+    #stego-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: none;
+    }
+
+    #stego-input-area {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      border-bottom: 1px solid rgba(0, 255, 65, 0.4);
+      padding-bottom: 0.4rem;
+      transition: opacity 0.6s ease;
+    }
+
+    #stego-input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      outline: none;
+      font-family: inherit;
+      font-size: clamp(0.75rem, 2vw, 0.9rem);
+      letter-spacing: 0.15em;
+      color: #00ff41;
+      caret-color: #00ff41;
+    }
+
+    #stego-input::placeholder {
+      color: rgba(0, 255, 65, 0.25);
+      letter-spacing: 0.1em;
+    }
+
+    #stego-denied {
+      font-size: 0.8rem;
+      letter-spacing: 0.3em;
+      color: #ff2222;
+      text-shadow: 0 0 8px #ff2222, 0 0 18px rgba(255, 34, 34, 0.5);
+      min-height: 1.2em;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    #stego-denied.stego-visible {
+      opacity: 1;
+      animation: shake 0.4s ease, denied-fade 1.0s ease 0.9s forwards;
+    }
+
+    #stego-success-overlay {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.6rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease;
+    }
+
+    #stego-success-overlay.stego-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #stego-success-text {
+      font-size: clamp(0.7rem, 2vw, 0.85rem);
+      letter-spacing: 0.2em;
+      color: #00ff41;
+      text-shadow:
+        0 0 4px #00ff41,
+        0 0 12px #00ff41,
+        0 0 28px rgba(0, 255, 65, 0.5);
+      text-align: center;
+    }
+
+    #decrypt-btn {
+      display: inline-block;
+      padding: 0.7rem 1.6rem;
+      border: 1px solid #00ff41;
+      color: #00ff41;
+      font-family: inherit;
+      font-size: clamp(0.7rem, 2vw, 0.85rem);
+      letter-spacing: 0.3em;
+      text-decoration: none;
+      text-shadow: 0 0 6px #00ff41;
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.2), inset 0 0 10px rgba(0, 255, 65, 0.05);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s ease, box-shadow 0.3s ease;
+      animation: none;
+    }
+
+    #decrypt-btn.stego-visible {
+      opacity: 1;
+      pointer-events: auto;
+      animation: decrypt-pulse 2s ease-in-out infinite;
+    }
+
+    #decrypt-btn:hover {
+      background: rgba(0, 255, 65, 0.08);
+      box-shadow: 0 0 20px rgba(0, 255, 65, 0.5), inset 0 0 12px rgba(0, 255, 65, 0.1);
+    }
+
+    @keyframes decrypt-pulse {
+      0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 255, 65, 0.2), inset 0 0 10px rgba(0, 255, 65, 0.05);
+        text-shadow: 0 0 6px #00ff41;
+      }
+      50% {
+        box-shadow: 0 0 25px rgba(0, 255, 65, 0.6), 0 0 50px rgba(0, 255, 65, 0.2), inset 0 0 14px rgba(0, 255, 65, 0.15);
+        text-shadow: 0 0 6px #00ff41, 0 0 16px #00ff41;
+      }
     }
   </style>
 </head>
@@ -403,18 +538,30 @@
 
       <p id="presence-notice"></p>
 
-      <div id="puzzle-area">
-        <span class="puzzle-label">[ SECTOR 7 — RESTRICTED ]</span>
-        <div class="puzzle-lines">
-          <span>&gt; LOADING TRANSMISSION...</span>
-          <span>&gt; SIGNAL ACQUIRED: 47.3%</span>
-          <span>&gt; DECRYPTION KEY: ░░░░░░░░░░░░</span>
-          <span>&gt; STATUS: PENDING</span>
+      <p id="presence-logged"></p>
+
+      <div id="stego-image-wrapper" style="opacity:0">
+        <div id="stego-loading">
+          <span class="stego-hint">IMAGE PENDING UPLOAD</span>
+          <div class="stego-bar-container">
+            <div class="stego-bar"><div class="stego-bar-fill"></div></div>
+            <span class="stego-bar-pct">0%</span>
+          </div>
         </div>
-        <div class="signal-bar-container">
-          <div class="signal-bar"></div>
-          <span class="signal-pct">12%</span>
-        </div>
+        <img id="stego-image" src="Gemini_Generated_Image_7t49gg7t49gg7t49.png" alt="" />
+      </div>
+
+      <div id="stego-input-area" style="opacity:0">
+        <span class="prompt-arrow">&gt;</span>
+        <input id="stego-input" type="text" autocomplete="off" autocorrect="off"
+               autocapitalize="off" spellcheck="false"
+               placeholder="ENTER DECODED MESSAGE..." />
+      </div>
+      <div id="stego-denied">INCORRECT — TRY AGAIN</div>
+      <div id="stego-success-overlay">
+        <div id="stego-success-text"></div>
+        <a id="decrypt-btn" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+           target="_blank" rel="noopener noreferrer">[ DECRYPT MESSAGE ]</a>
       </div>
 
     </div>
@@ -445,17 +592,78 @@
     function initPage2() {
       const el = document.getElementById('cryptic-sentence');
       const notice = document.getElementById('presence-notice');
-      const line1 = 'THE SEQUENCE DOES NOT REPEAT. IT COMPOUNDS.';
-      const line2 = '\nTHOSE WHO REACH THIS PAGE WERE ALREADY KNOWN.';
+      const line1 = 'NOT EVERYTHING IS AS IT APPEARS.';
+      const line2 = '\nSOME TRUTHS HIDE IN PLAIN SIGHT.';
       typewriter(el, line1, 80, () => {
         setTimeout(() => {
           typewriter(el, line2, 80, () => {
             setTimeout(() => {
-              typewriter(notice, 'WE KNOW YOU ARE HERE.', 90, null);
+              typewriter(notice, 'LOOK CLOSER.', 90, () => {
+                setTimeout(() => {
+                  const logged = document.getElementById('presence-logged');
+                  typewriter(logged, 'YOUR PRESENCE HAS BEEN NOTED.', 70, () => {
+                    setTimeout(revealImageBox, 1200);
+                  });
+                }, 800);
+              });
             }, 600);
           });
         }, 400);
       });
+    }
+
+    function revealImageBox() {
+      const wrapper = document.getElementById('stego-image-wrapper');
+      wrapper.style.opacity = '1';
+      setTimeout(runLoadingBar, 900);
+    }
+
+    function runLoadingBar() {
+      const fill = document.querySelector('.stego-bar-fill');
+      const pct  = document.querySelector('.stego-bar-pct');
+      let progress = 0;
+
+      const tick = () => {
+        progress += Math.random() * 6 + 1;
+        if (progress >= 100) {
+          progress = 100;
+          fill.style.width = '100%';
+          pct.textContent = '100%';
+          setTimeout(showLoadedImage, 500);
+          return;
+        }
+        fill.style.width = progress + '%';
+        pct.textContent = Math.floor(progress) + '%';
+        setTimeout(tick, 80 + Math.random() * 120);
+      };
+      tick();
+    }
+
+    function showLoadedImage() {
+      const wrapper = document.getElementById('stego-image-wrapper');
+      const loading = document.getElementById('stego-loading');
+      const img     = document.getElementById('stego-image');
+
+      // Flash
+      wrapper.style.boxShadow = '0 0 30px rgba(0,255,65,0.6), inset 0 0 30px rgba(0,255,65,0.15)';
+
+      setTimeout(() => {
+        loading.style.opacity = '0';
+        setTimeout(() => {
+          loading.style.display = 'none';
+          if (img.getAttribute('src')) {
+            img.style.display = 'block';
+          }
+          wrapper.style.boxShadow = '';
+          setTimeout(revealStegoInput, 600);
+        }, 400);
+      }, 200);
+    }
+
+    function revealStegoInput() {
+      const inputArea = document.getElementById('stego-input-area');
+      inputArea.style.transition = 'opacity 0.6s ease';
+      inputArea.style.opacity = '1';
     }
 
     function notifyDiscord() {
@@ -515,6 +723,43 @@ async function hashInput(str) {
         const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
         return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
       }
+
+      // ── Stego puzzle ──────────────────────────────────────
+      const STEGO_ANSWER = 'test';
+
+      document.getElementById('stego-input').addEventListener('keyup', (e) => {
+        if (e.key !== 'Enter' && e.keyCode !== 13) return;
+        const val = e.target.value.trim().toLowerCase();
+        if (val === STEGO_ANSWER) {
+          stegoSuccess();
+        } else {
+          stegoShowDenied();
+        }
+      });
+
+      function stegoShowDenied() {
+        const el = document.getElementById('stego-denied');
+        el.classList.remove('stego-visible');
+        void el.offsetWidth;
+        el.classList.add('stego-visible');
+        setTimeout(() => el.classList.remove('stego-visible'), 2100);
+      }
+
+      function stegoSuccess() {
+        const inputArea = document.getElementById('stego-input-area');
+        const overlay   = document.getElementById('stego-success-overlay');
+        const textEl    = document.getElementById('stego-success-text');
+        const btn       = document.getElementById('decrypt-btn');
+
+        inputArea.style.opacity = '0';
+        inputArea.style.pointerEvents = 'none';
+
+        overlay.classList.add('stego-visible');
+        typewriter(textEl, '// DECRYPTION SUCCESSFUL — MESSAGE UNLOCKED', 40, () => {
+          setTimeout(() => btn.classList.add('stego-visible'), 400);
+        });
+      }
+      // ──────────────────────────────────────────────────────
 
       input.addEventListener('keyup', async (e) => {
         if (e.key !== 'Enter' && e.keyCode !== 13) return;
