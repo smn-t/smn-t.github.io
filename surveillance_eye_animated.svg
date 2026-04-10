@@ -1,0 +1,220 @@
+<svg width="100%" viewBox="0 0 680 500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    @keyframes pulse { 0%,100%{opacity:0.7} 50%{opacity:1} }
+    @keyframes pulseSmall { 0%,100%{opacity:0.3} 50%{opacity:0.6} }
+    @keyframes scanFlicker { 0%{opacity:0.12} 20%{opacity:0.18} 40%{opacity:0.08} 60%{opacity:0.15} 80%{opacity:0.05} 100%{opacity:0.12} }
+    @keyframes rotate { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+    @keyframes rotateReverse { from{transform:rotate(360deg)} to{transform:rotate(0deg)} }
+    @keyframes pupilPulse { 0%,100%{r:28} 50%{r:32} }
+    @keyframes glitchShift { 0%,90%,100%{transform:translate(0,0)} 92%{transform:translate(3px,-1px)} 94%{transform:translate(-2px,1px)} 96%{transform:translate(1px,2px)} 98%{transform:translate(-1px,-1px)} }
+    @keyframes textFlicker { 0%,100%{opacity:0.5} 30%{opacity:0.5} 31%{opacity:0.1} 33%{opacity:0.5} 70%{opacity:0.5} 71%{opacity:0.05} 72%{opacity:0.5} }
+    @keyframes reflectionPulse { 0%,100%{opacity:0.25} 50%{opacity:0.45} }
+  </style>
+
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="glowStrong">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="eyeClip">
+      <path d="M100 250 Q220 130 340 130 Q460 130 580 250 Q460 370 340 370 Q220 370 100 250 Z"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background removed — page provides #0a0a0a -->
+
+  <!-- Scanlines inside eye shape - flickering -->
+  <g style="animation:scanFlicker 3s ease-in-out infinite" clip-path="url(#eyeClip)">
+    <g stroke="#00ff41" stroke-width="0.5">
+      <line x1="0" y1="130" x2="680" y2="130"/>
+      <line x1="0" y1="134" x2="680" y2="134"/>
+      <line x1="0" y1="138" x2="680" y2="138"/>
+      <line x1="0" y1="142" x2="680" y2="142"/>
+      <line x1="0" y1="146" x2="680" y2="146"/>
+      <line x1="0" y1="150" x2="680" y2="150"/>
+      <line x1="0" y1="154" x2="680" y2="154"/>
+      <line x1="0" y1="158" x2="680" y2="158"/>
+      <line x1="0" y1="162" x2="680" y2="162"/>
+      <line x1="0" y1="166" x2="680" y2="166"/>
+      <line x1="0" y1="170" x2="680" y2="170"/>
+      <line x1="0" y1="174" x2="680" y2="174"/>
+      <line x1="0" y1="178" x2="680" y2="178"/>
+      <line x1="0" y1="182" x2="680" y2="182"/>
+      <line x1="0" y1="186" x2="680" y2="186"/>
+      <line x1="0" y1="190" x2="680" y2="190"/>
+      <line x1="0" y1="194" x2="680" y2="194"/>
+      <line x1="0" y1="198" x2="680" y2="198"/>
+      <line x1="0" y1="202" x2="680" y2="202"/>
+      <line x1="0" y1="206" x2="680" y2="206"/>
+      <line x1="0" y1="210" x2="680" y2="210"/>
+      <line x1="0" y1="214" x2="680" y2="214"/>
+      <line x1="0" y1="218" x2="680" y2="218"/>
+      <line x1="0" y1="222" x2="680" y2="222"/>
+      <line x1="0" y1="226" x2="680" y2="226"/>
+      <line x1="0" y1="230" x2="680" y2="230"/>
+      <line x1="0" y1="234" x2="680" y2="234"/>
+      <line x1="0" y1="238" x2="680" y2="238"/>
+      <line x1="0" y1="242" x2="680" y2="242"/>
+      <line x1="0" y1="246" x2="680" y2="246"/>
+      <line x1="0" y1="250" x2="680" y2="250"/>
+      <line x1="0" y1="254" x2="680" y2="254"/>
+      <line x1="0" y1="258" x2="680" y2="258"/>
+      <line x1="0" y1="262" x2="680" y2="262"/>
+      <line x1="0" y1="266" x2="680" y2="266"/>
+      <line x1="0" y1="270" x2="680" y2="270"/>
+      <line x1="0" y1="274" x2="680" y2="274"/>
+      <line x1="0" y1="278" x2="680" y2="278"/>
+      <line x1="0" y1="282" x2="680" y2="282"/>
+      <line x1="0" y1="286" x2="680" y2="286"/>
+      <line x1="0" y1="290" x2="680" y2="290"/>
+      <line x1="0" y1="294" x2="680" y2="294"/>
+      <line x1="0" y1="298" x2="680" y2="298"/>
+      <line x1="0" y1="302" x2="680" y2="302"/>
+      <line x1="0" y1="306" x2="680" y2="306"/>
+      <line x1="0" y1="310" x2="680" y2="310"/>
+      <line x1="0" y1="314" x2="680" y2="314"/>
+      <line x1="0" y1="318" x2="680" y2="318"/>
+      <line x1="0" y1="322" x2="680" y2="322"/>
+      <line x1="0" y1="326" x2="680" y2="326"/>
+      <line x1="0" y1="330" x2="680" y2="330"/>
+      <line x1="0" y1="334" x2="680" y2="334"/>
+      <line x1="0" y1="338" x2="680" y2="338"/>
+      <line x1="0" y1="342" x2="680" y2="342"/>
+      <line x1="0" y1="346" x2="680" y2="346"/>
+      <line x1="0" y1="350" x2="680" y2="350"/>
+      <line x1="0" y1="354" x2="680" y2="354"/>
+      <line x1="0" y1="358" x2="680" y2="358"/>
+      <line x1="0" y1="362" x2="680" y2="362"/>
+      <line x1="0" y1="366" x2="680" y2="366"/>
+      <line x1="0" y1="370" x2="680" y2="370"/>
+    </g>
+  </g>
+
+  <!-- Eye shape - outer contour with pulsing glow -->
+  <g filter="url(#glow)" style="animation:pulse 4s ease-in-out infinite">
+    <path d="M100 250 Q220 130 340 130 Q460 130 580 250 Q460 370 340 370 Q220 370 100 250 Z"
+          fill="none" stroke="#00ff41" stroke-width="1.5"/>
+  </g>
+  <!-- Inner eye contour -->
+  <path d="M120 250 Q230 145 340 145 Q450 145 560 250 Q450 355 340 355 Q230 355 120 250 Z"
+        fill="none" stroke="#00ff41" stroke-width="0.5" opacity="0.3"
+        style="animation:pulseSmall 3s ease-in-out infinite"/>
+
+  <!-- Rotating targeting ring - outer (slow clockwise) -->
+  <g style="transform-origin:340px 250px;animation:rotate 20s linear infinite" filter="url(#glow)">
+    <circle cx="340" cy="250" r="100" fill="none" stroke="#00ff41"
+            stroke-width="0.5" opacity="0.3" stroke-dasharray="8 16"/>
+    <circle cx="340" cy="250" r="95" fill="none" stroke="#00ff41"
+            stroke-width="0.3" opacity="0.15" stroke-dasharray="3 20"/>
+  </g>
+
+  <!-- Rotating targeting ring - inner (reverse) -->
+  <g style="transform-origin:340px 250px;animation:rotateReverse 15s linear infinite">
+    <circle cx="340" cy="250" r="48" fill="none" stroke="#00ff41"
+            stroke-width="0.5" opacity="0.25" stroke-dasharray="6 12"/>
+  </g>
+
+  <!-- Iris rings -->
+  <circle cx="340" cy="250" r="75" fill="none" stroke="#00ff41"
+          stroke-width="1.2" opacity="0.7" style="animation:pulse 5s ease-in-out infinite"/>
+  <circle cx="340" cy="250" r="65" fill="none" stroke="#00ff41"
+          stroke-width="0.5" opacity="0.4"/>
+  <circle cx="340" cy="250" r="55" fill="none" stroke="#00ff41"
+          stroke-width="0.3" opacity="0.25"/>
+
+  <!-- Iris radial detail lines -->
+  <g opacity="0.3" stroke="#00ff41" stroke-width="0.5">
+    <line x1="340" y1="175" x2="340" y2="200"/>
+    <line x1="340" y1="300" x2="340" y2="325"/>
+    <line x1="265" y1="250" x2="290" y2="250"/>
+    <line x1="390" y1="250" x2="415" y2="250"/>
+    <line x1="287" y1="197" x2="303" y2="213"/>
+    <line x1="377" y1="287" x2="393" y2="303"/>
+    <line x1="393" y1="197" x2="377" y2="213"/>
+    <line x1="303" y1="287" x2="287" y2="303"/>
+  </g>
+
+  <!-- Iris organic texture (vein-like lines) -->
+  <g opacity="0.2" stroke="#00ff41" stroke-width="0.4" fill="none">
+    <path d="M310 195 Q325 220 340 195"/>
+    <path d="M355 195 Q370 215 375 200"/>
+    <path d="M295 220 Q310 240 300 255"/>
+    <path d="M375 230 Q385 245 380 260"/>
+    <path d="M305 275 Q320 290 310 305"/>
+    <path d="M365 270 Q375 285 370 300"/>
+    <path d="M330 300 Q340 315 350 305"/>
+    <path d="M310 230 Q320 245 315 260"/>
+    <path d="M365 220 Q372 238 368 252"/>
+  </g>
+
+  <!-- Pupil - outer ring -->
+  <circle cx="340" cy="250" r="30" fill="#0a0a0a" stroke="#00ff41"
+          stroke-width="0.8" opacity="0.9"/>
+  <!-- Pupil - breathing animation -->
+  <circle cx="340" cy="250" fill="#050505">
+    <animate attributeName="r" values="28;32;28" dur="6s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- Pupil inner glow ring -->
+  <circle cx="340" cy="250" r="15" fill="none" stroke="#00ff41"
+          stroke-width="0.3" opacity="0.4"
+          style="animation:pulseSmall 2s ease-in-out infinite"/>
+
+  <!-- Light reflections - pulsing -->
+  <g style="animation:reflectionPulse 3s ease-in-out infinite">
+    <ellipse cx="325" cy="235" rx="8" ry="6" fill="#00ff41" opacity="0.2"/>
+    <ellipse cx="325" cy="235" rx="4" ry="3" fill="#00ff41" opacity="0.4"/>
+    <circle cx="358" cy="260" r="3" fill="#00ff41" opacity="0.15"/>
+  </g>
+
+  <!-- Crosshair overlay -->
+  <g stroke="#00ff41" stroke-width="0.5" opacity="0.2">
+    <line x1="340" y1="130" x2="340" y2="228"/>
+    <line x1="340" y1="272" x2="340" y2="370"/>
+    <line x1="200" y1="250" x2="318" y2="250"/>
+    <line x1="362" y1="250" x2="480" y2="250"/>
+  </g>
+
+  <!-- Corner targeting brackets - pulsing -->
+  <g stroke="#00ff41" stroke-width="1" opacity="0.6"
+     style="animation:pulse 4s ease-in-out infinite">
+    <path d="M140 170 L140 155 L155 155" fill="none"/>
+    <path d="M540 170 L540 155 L525 155" fill="none"/>
+    <path d="M140 330 L140 345 L155 345" fill="none"/>
+    <path d="M540 330 L540 345 L525 345" fill="none"/>
+  </g>
+
+  <!-- Data readout text - flickering -->
+  <g style="animation:textFlicker 4s step-end infinite">
+    <text x="155" y="168" font-family="monospace" font-size="9"
+          fill="#00ff41" opacity="0.6">SCAN ACTIVE</text>
+    <text x="460" y="168" font-family="monospace" font-size="9"
+          fill="#00ff41" opacity="0.6">ID:UNKNOWN</text>
+  </g>
+  <g style="animation:textFlicker 5s step-end infinite">
+    <text x="155" y="342" font-family="monospace" font-size="9"
+          fill="#00ff41" opacity="0.6">THREAT:███████</text>
+    <text x="450" y="342" font-family="monospace" font-size="9"
+          fill="#00ff41" opacity="0.6">LOCK:ENGAGED</text>
+  </g>
+
+  <!-- Glitch blocks - occasional position shift -->
+  <g style="animation:glitchShift 8s step-end infinite">
+    <rect x="180" y="220" width="50" height="2" fill="#00ff41" opacity="0.08"/>
+    <rect x="420" y="275" width="70" height="1.5" fill="#00ff41" opacity="0.06"/>
+    <rect x="250" y="310" width="35" height="1" fill="#00ff41" opacity="0.1"/>
+    <rect x="380" y="195" width="55" height="1.5" fill="#00ff41" opacity="0.07"/>
+  </g>
+
+  <!-- Vignette removed -->
+</svg>

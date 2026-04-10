@@ -68,6 +68,12 @@
       pointer-events: auto;
     }
 
+    #page-main {
+      align-items: flex-start;
+      padding-top: 1rem;
+      overflow-y: auto;
+    }
+
     /* =====================
        PAGE 1 — GATE
     ===================== */
@@ -165,7 +171,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 2.8rem;
+      text-align: center;
+      gap: 1.6rem;
       padding: 2rem;
       max-width: 700px;
       width: 100%;
@@ -175,6 +182,13 @@
 
     #logo-symbol {
       animation: glitch 8s steps(1) infinite;
+    }
+
+    .eye-svg {
+      width: clamp(160px, 40vw, 300px);
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.3));
     }
 
     @keyframes glitch {
@@ -283,7 +297,7 @@
       font-size: clamp(0.7rem, 2vw, 0.85rem);
       letter-spacing: 0.2em;
       text-align: center;
-      line-height: 2;
+      line-height: 1.5;
       text-shadow: 0 0 6px rgba(0, 170, 43, 0.6);
       min-height: 3em;
       white-space: pre-line;
@@ -501,6 +515,27 @@
         text-shadow: 0 0 6px #00ff41, 0 0 16px #00ff41;
       }
     }
+
+    /* --- Bull download --- */
+
+    #bull-download {
+      display: inline-block;
+      padding: 0.5rem 1.4rem;
+      border: 1px solid #00aa2b;
+      color: #00aa2b;
+      font-family: inherit;
+      font-size: clamp(0.6rem, 1.5vw, 0.75rem);
+      letter-spacing: 0.3em;
+      text-decoration: none;
+      text-shadow: 0 0 4px rgba(0, 170, 43, 0.4);
+      box-shadow: 0 0 6px rgba(0, 170, 43, 0.15), inset 0 0 6px rgba(0, 170, 43, 0.05);
+      transition: box-shadow 0.3s ease, background 0.3s ease;
+    }
+
+    #bull-download:hover {
+      background: rgba(0, 170, 43, 0.06);
+      box-shadow: 0 0 12px rgba(0, 170, 43, 0.3), inset 0 0 8px rgba(0, 170, 43, 0.08);
+    }
   </style>
 </head>
 <body>
@@ -527,11 +562,7 @@
     <div class="main-content">
 
       <div id="logo-symbol" aria-hidden="true">
-        <div class="sigil-outer">
-          <div class="sigil-ring"></div>
-          <div class="sigil-inner"></div>
-          <div class="sigil-crosshair"></div>
-        </div>
+        <img src="surveillance_eye_animated.svg" alt="" class="eye-svg" />
       </div>
 
       <p id="cryptic-sentence"></p>
@@ -548,8 +579,10 @@
             <span class="stego-bar-pct">0%</span>
           </div>
         </div>
-        <img id="stego-image" src="Gemini_Generated_Image_7t49gg7t49gg7t49.png" alt="" />
+        <img id="stego-image" src="bull.png" alt="" />
       </div>
+
+      <a id="bull-download" href="bull.png" download="bull.png" style="opacity:0">[ DOWNLOAD ]</a>
 
       <div id="stego-input-area" style="opacity:0">
         <span class="prompt-arrow">&gt;</span>
@@ -563,6 +596,7 @@
         <a id="decrypt-btn" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
            target="_blank" rel="noopener noreferrer">[ DECRYPT MESSAGE ]</a>
       </div>
+
 
     </div>
   </div>
@@ -655,6 +689,9 @@
             img.style.display = 'block';
           }
           wrapper.style.boxShadow = '';
+          const dlBtn = document.getElementById('bull-download');
+          dlBtn.style.transition = 'opacity 0.6s ease';
+          dlBtn.style.opacity = '1';
           setTimeout(revealStegoInput, 600);
         }, 400);
       }, 200);
